@@ -33,6 +33,10 @@ export const MenuContainer = styled.nav`
     &:hover{
       color: ${theme.colors.mediumGray};
     }
+
+    svg{
+      color:${theme.colors.yellow};
+    }
   }
 
   ul{
@@ -60,6 +64,18 @@ export const MenuContainer = styled.nav`
         li{
           background-color: ${theme.colors.primaryColor};
           width: 20rem;
+          transition: all 300ms ease-in-out;
+          border-radius: 0.5rem;
+
+          &:hover, &:focus {
+            transform: scale(1.1);
+            background: ${theme.colors.yellow};
+            color: ${theme.colors.primaryColor};
+
+            .link{
+                color: ${theme.colors.primaryColor};
+            }
+          }
         }
       }
     }
@@ -82,6 +98,7 @@ export const MenuContainer = styled.nav`
         flex-direction: column;
         margin-right: auto;
 
+
         li{
 
           &:hover ul, &:focus ul{
@@ -92,11 +109,17 @@ export const MenuContainer = styled.nav`
             position: relative;
             visibility: visible;
             opacity: 1;
+
+            li{
+              border: 0.5px solid rgba(253, 200, 59, 0.3);
+            }
           }
 
         }
 
-
+        a{
+          margin: 0 auto;
+        }
 
       }
     }
@@ -109,7 +132,7 @@ export const Button = styled.button`
   ${({ theme, visible }) => css`
       z-index: 6;
       position: absolute;
-      top: 5rem;
+      top: 3.4rem;
       right: 2rem;
       width: 4rem;
       height: 4rem;

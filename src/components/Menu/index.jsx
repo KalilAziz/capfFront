@@ -6,6 +6,8 @@ import { Close as CloseIcon } from '@styled-icons/material-outlined/Close';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FiChevronDown } from 'react-icons/fi';
+import { BsBoxArrowInRight } from 'react-icons/bs';
+import { Button } from '../Button';
 
 export const Menu = () => {
   // eslint-disable-next-line
@@ -23,7 +25,7 @@ export const Menu = () => {
           <MenuIcon aria-label="Open menu" />
         )}
       </Styled.Button>
-      <Styled.Container onClick={() => setVisible(false)}>
+      <Styled.Container onClick={() => setVisible(false)} visible={visible}>
         <SectionContainer>
           <LogoLink srcImg="https://capf.com.br/svg/capf-logo.svg" link="#" />
           <Styled.MenuContainer visible={visible}>
@@ -77,6 +79,9 @@ export const Menu = () => {
                   </ul>
                 </Link>
               </li>
+              <Button link={'/'}>
+                Login <BsBoxArrowInRight />
+              </Button>
             </ul>
           </Styled.MenuContainer>
         </SectionContainer>

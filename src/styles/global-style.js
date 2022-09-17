@@ -16,4 +16,7 @@ export const GlobalStyles = createGlobalStyle`
     font-size: 1.6rem;
     font-family: ${({ theme }) => theme.fonts.family.default};
   }
+  a{
+    text-decoration: none;
+  }
 `;
