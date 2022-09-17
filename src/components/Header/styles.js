@@ -1,5 +1,8 @@
 import styled, { css } from 'styled-components';
 import { Container as SectionContainer } from '../SectionContainer/styles';
+import { Link } from 'react-router-dom';
+import { Container as Login } from '../Button/styles';
+
 //import { Title as Heading } from '../Heading/styles';
 
 const menuVisible = () => css`
@@ -8,7 +11,19 @@ const menuVisible = () => css`
   transform: translateX(0px);
 `;
 
-export const Container = styled.div`
+export const Links = styled(Link)`
+
+${({ theme }) => css`
+    color: ${theme.colors.white};
+    text-decoration: none;
+
+    svg{
+      color:${theme.colors.yellow};
+    }
+  `}
+`;
+
+export const Container = styled.header`
 ${({ theme }) => css`
   background-color: ${theme.colors.primaryColor};
   padding: ${theme.spacings.small};
@@ -26,19 +41,6 @@ ${SectionContainer}{
 export const MenuContainer = styled.nav`
   ${({ theme, visible }) => css`
 
-  .link{
-    color: ${theme.colors.white};
-    text-decoration: none;
-
-    &:hover{
-      color: ${theme.colors.mediumGray};
-    }
-
-    svg{
-      color:${theme.colors.yellow};
-    }
-  }
-
   ul{
     list-style: none;
     display: flex;
@@ -51,6 +53,8 @@ export const MenuContainer = styled.nav`
         visibility: visible;
         opacity: 1;
         transform: translateY(15px);
+
+
       }
 
       ul{
@@ -67,14 +71,14 @@ export const MenuContainer = styled.nav`
           transition: all 300ms ease-in-out;
           border-radius: 0.5rem;
 
+          &:hover ${Links}{
+            color: ${theme.colors.primaryColor};
+          }
+
           &:hover, &:focus {
             transform: scale(1.1);
             background: ${theme.colors.yellow};
             color: ${theme.colors.primaryColor};
-
-            .link{
-                color: ${theme.colors.primaryColor};
-            }
           }
         }
       }
@@ -94,12 +98,20 @@ export const MenuContainer = styled.nav`
       transform: translateX(-100px);
       ${visible && menuVisible}
 
+
       ul{
         flex-direction: column;
         margin-right: auto;
+        align-items: center;
 
 
         li{
+          text-align: center;
+
+          ${Links}{
+            text-align: center;
+          }
+
 
           &:hover ul, &:focus ul{
             transform: translateY(0);
@@ -117,14 +129,22 @@ export const MenuContainer = styled.nav`
 
         }
 
-        a{
-          margin: 0 auto;
-        }
-
       }
+
+      ${Login}{
+        margin-top: 20px;
+      }
+
+
     }
 
   `}
+`;
+
+const rotate = (theme) => css`
+  transform: rotate(1turn);
+  color:${theme.colors.yellow};
+
 `;
 
 export const Button = styled.button`
@@ -141,6 +161,9 @@ export const Button = styled.button`
       border: none;
       display: none;
       pointer-events: ${visible ? 'none' : 'all'};
+      transition: all 300ms ease-in-out;
+      ${visible && rotate(theme)}
+
       @media ${theme.media.lteMedium}{
         display: flex;
         align-items: center;

@@ -1,8 +1,9 @@
 import P from 'prop-types';
 import * as Styled from './styles';
 
+// eslint-disable-next-line
 export const Button = ({ children, link }) => {
-  return <Styled.Container href={link}>{children}</Styled.Container>;
+  return <Styled.Container to={link}>{children}</Styled.Container>;
 };
 Button.propTypes = {
   children: P.node,

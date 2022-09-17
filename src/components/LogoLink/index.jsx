@@ -1,6 +1,7 @@
 import P from 'prop-types';
 import * as Styled from './styles';
 
+// eslint-disable-next-line
 export const LogoLink = ({ srcImg = '', link }) => {
   return (
     <Styled.Container href={link}>
