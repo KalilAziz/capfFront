@@ -1,11 +1,34 @@
+import * as Styled from './styles';
 import P from 'prop-types';
-import { Link } from 'react-router-dom';
+
+//Hook e Router
+import { useContext } from 'react';
+import { Link, Navigate } from 'react-router-dom';
+
+//Components
 import { ButtonProviderLogin } from '../ButtonProviderLogin';
 import { Heading } from '../Heading';
-//import { SectionBackground } from '../SectionBackground';
-import * as Styled from './styles';
+
+//Provider
+import { LoginContext } from '../../context/LoginProvider/context';
 
 export const LoginIn = () => {
+  // eslint-disable-next-line
+  const { state, dispatch, signInEmail, signInGoogle, signInFacebook, signed, user, signOut } = useContext(LoginContext);
+
+  const loginEmail = async () => {
+    await signInEmail();
+  };
+
+  const loginGoogle = async () => {
+    await signInGoogle();
+  };
+
+  const loginFacebook = async () => {
+    await signInFacebook();
+  };
+
+  console.log(state);
   return (
     <Styled.Container>
       <Styled.Frame>
@@ -29,12 +52,25 @@ export const LoginIn = () => {
               <input type="password" name="" id="" />
               <span>Esqueci a senha</span>
             </label>
-            <Styled.Button type="submit">Entrar</Styled.Button>
           </form>
+          {!signed && (
+            <Styled.Button onClick={() => loginEmail()}>Entrar</Styled.Button>
+          )}
           <p>Você também pode entrar por:</p>
           <Styled.providerLogin>
-            <ButtonProviderLogin srcImage="GoogleLoginIcon.svg" />
-            <ButtonProviderLogin srcImage="FaceLoginIcon.svg" />
+            {!signed && (
+              <ButtonProviderLogin
+                onClick={() => loginGoogle()}
+                srcImage="GoogleLoginIcon.svg"
+              />
+            )}
+            {!signed && (
+              <ButtonProviderLogin
+                onClick={() => loginFacebook()}
+                srcImage="FaceLoginIcon.svg"
+              />
+            )}
+            {signed && <Navigate to="/dashboard" />}
           </Styled.providerLogin>
           <p>
             Não tem uma conta? <Link>Crie uma</Link>
