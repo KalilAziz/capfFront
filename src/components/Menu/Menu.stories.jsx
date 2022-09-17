@@ -1,22 +1,18 @@
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Menu } from '.';
-import linksMock from '../NavLinks/mock';
+
 export default {
   title: 'Menu',
   component: Menu,
-  args: {
-    links: linksMock,
-    logoData: {
-      text: 'Logo',
-      link: '#target',
-      srcImg: 'https://capf.com.br/svg/capf-logo.svg',
-    },
-  },
+  args: {},
 };
 
-export const template = (args) => {
+export const template = () => {
   return (
-    <div>
-      <Menu {...args} />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route element={<Menu />} />
+      </Routes>
+    </BrowserRouter>
   );
 };

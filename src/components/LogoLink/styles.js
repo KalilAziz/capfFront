@@ -4,7 +4,7 @@ export const Container = styled.a`
   ${() => css`
 
     img{
-      max-height: 8rem;
+      max-height: 10rem;
     }
   `}
 `;

@@ -9,7 +9,6 @@ export const LogoLink = ({ srcImg = '', link }) => {
   );
 };
 LogoLink.propTypes = {
-  text: P.string.isRequired,
   srcImg: P.string,
   link: P.string.isRequired,
 };

@@ -1,11 +1,11 @@
 import * as Styled from './styles.js';
-import { Heading } from '../../components/Heading';
+import { Menu } from '../../components/Menu/index.jsx';
 
 export const Home = () => {
   return (
     <>
       <Styled.Container>
-        <Heading>O texto que eu quero</Heading>
+        <Menu />
       </Styled.Container>
     </>
   );
