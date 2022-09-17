@@ -5,7 +5,7 @@ import { ThemeProvider } from 'styled-components';
 import { GlobalStyles } from './styles/global-style';
 import { theme } from './styles/theme';
 import { Home } from './templates/App';
-import { Login } from './templates/Login';
+import { System } from './templates/System';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -14,7 +14,7 @@ root.render(
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/login" element={<System />} />
         </Routes>
       </BrowserRouter>
       <GlobalStyles />
