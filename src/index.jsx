@@ -10,6 +10,7 @@ import { Home } from './templates/App';
 import { CheckUser } from './templates/Login/CheckUser';
 import { Login } from './templates/Login';
 import { PrivateRoute } from './templates/Login/PrivateRoute';
+import { RegistrationProviderForm } from './components/RegistrationProviderForm';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -21,7 +22,11 @@ root.render(
 
           <Route path="/login" element={<Login />} />
 
-          <Route path="/checkout" element={<CheckUser />} />
+          <Route path="/login/checkout" element={<CheckUser />} />
+          <Route
+            path="/login/register"
+            element={<RegistrationProviderForm />}
+          />
 
           <Route path="/dashboard" element={<PrivateRoute />}>
             <Route path="/dashboard" element={<Dashboard />} />

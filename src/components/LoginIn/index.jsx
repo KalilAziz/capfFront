@@ -70,7 +70,7 @@ export const LoginIn = () => {
                 srcImage="FaceLoginIcon.svg"
               />
             )}
-            {signed && <Navigate to="/checkout" />}
+            {signed && <Navigate to="/login/checkout" />}
           </Styled.providerLogin>
           <p>
             Não tem uma conta? <Link>Crie uma</Link>
