@@ -1,5 +1,4 @@
 import * as Styled from './styles';
-import P from 'prop-types';
 
 //Hook e Router
 import { useContext } from 'react';
@@ -14,7 +13,8 @@ import { LoginContext } from '../../context/LoginProvider/context';
 
 export const LoginIn = () => {
   // eslint-disable-next-line
-  const { state, dispatch, signInEmail, signInGoogle, signInFacebook, signed, user, signOut } = useContext(LoginContext);
+  const { state, signInEmail, signInGoogle, signInFacebook, signed } =
+    useContext(LoginContext);
 
   const loginEmail = async () => {
     await signInEmail();
@@ -73,13 +73,10 @@ export const LoginIn = () => {
             {signed && <Navigate to="/login/checkout" />}
           </Styled.providerLogin>
           <p>
-            Não tem uma conta? <Link>Crie uma</Link>
+            Não tem uma conta? <Link to="/login/register">Crie uma</Link>
           </p>
         </Styled.Form>
       </Styled.Frame>
     </Styled.Container>
   );
-};
-LoginIn.propTypes = {
-  children: P.node,
 };

@@ -101,7 +101,7 @@ export const LoginProvider = ({ children }) => {
     setUser(null);
     console.log('deslogado');
 
-    return <Navigate to="/" />;
+    return <Navigate to="/home" />;
   };
 
   return (

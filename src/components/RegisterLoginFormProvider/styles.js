@@ -67,7 +67,7 @@ export const Form = styled.div`
     flex: 1;
     text-align: center;
 
-    form{
+    .form{
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -78,7 +78,10 @@ export const Form = styled.div`
         color: #E6FFE5;
         margin-top: 2rem;
         position: relative;
-          input{
+
+          input[type="text"],
+          input[type="number"],
+          input[type="tel"]{
           display: block;
           width: 100%;
           height: 3rem;
@@ -86,13 +89,17 @@ export const Form = styled.div`
           border: 1px solid #FDC83B;
           box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
           border-radius: 5px;
-
+        }
+        .inputRadio{
+          margin-bottom: 1rem;
+          input[type="radio"]{
+          display: inline-block;
+          margin-right: 1rem;
+        }
         }
         span{
-          position: absolute;
-          margin-top: 0.7rem;
-          right: 0;
-          font-size: 1.3rem;
+          display: block;
+          margin-bottom: 2rem;
         }
       }
     }
@@ -108,7 +115,7 @@ export const Form = styled.div`
 
 export const Button = styled.button`
   ${({ theme }) => css`
-    margin-top: 5rem;
+    margin: 4rem 0 2rem 0;
     color: ${theme.colors.primaryColor};
     font-size: ${theme.spacings.small};
     background: ${theme.colors.yellow};
@@ -117,16 +124,14 @@ export const Button = styled.button`
     padding: 0.8rem;
     text-align: center;
     width: 80%;
+    cursor: pointer;
   `}
 
 `;
 
-export const providerLogin = styled.div`
+export const Counter = styled.div`
   ${() => css`
-    display: flex;
-    justify-content: center;
-    gap: 3rem;
-    margin-bottom: 3rem;
+    color: #E6FFE5;
   `}
 
 `;

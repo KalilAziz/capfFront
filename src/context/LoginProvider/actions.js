@@ -1,4 +1,4 @@
 import * as types from './types';
-export const deleteUser = (dispatch) => {
-  dispatch({ type: types.DELETE });
+export const CreateUSer = (dispatch, dataUser) => {
+  dispatch({ type: types.CREATEUSER, data: dataUser });
 };

@@ -6,8 +6,8 @@ import { BsBoxArrowLeft } from 'react-icons/bs';
 export const HeaderLogin = () => {
   return (
     <Styled.Container>
-      <LogoLink srcImg="./assets/images/capf_logo.svg" link="/" />
-      <Button link={'/'}>
+      <LogoLink srcImg="../assets/images/capf_logo.svg" link="/" />
+      <Button link={'/home'}>
         <BsBoxArrowLeft />
         Voltar
       </Button>

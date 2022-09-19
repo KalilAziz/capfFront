@@ -6,7 +6,7 @@ import { collection, getDocs, getFirestore } from 'firebase/firestore';
 
 //Dados ao Banco de dados
 import { firebaseApp } from '../../config/firebaseConfig';
-import { Loading } from '../../components/Loading';
+import { Loading } from '../../components/Loaging';
 
 export const CheckUser = () => {
   const navigate = useNavigate();
@@ -43,7 +43,7 @@ export const CheckUser = () => {
 
       const test = await emailUsers.includes(dataUserStorage.email);
       console.log('usuário existente: ', test);
-      test ? navigate('/dashboard') : navigate('/login/register');
+      test ? navigate('/dashboard') : navigate('/login/registerProvider');
       //test ? navigate('/dashboard') : '';
     };
 
