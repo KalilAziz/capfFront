@@ -6,18 +6,16 @@ export const Container = styled.div`
 
     ${Sectionbackground}{
       background: #002815;
-      padding-top: 0;
-      padding-bottom: 0;
+      padding: 0;
 
       @media ${theme.media.lteMedium} {
         display: block;
-        padding-top: 5rem;
+        padding-top: 8rem;
 
       }
     }
     ${SectionContainer}{
-      padding-top: 0;
-      padding-bottom: 0;
+      padding: 0;
     }
   `}
 `;

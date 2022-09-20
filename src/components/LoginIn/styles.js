@@ -1,41 +1,28 @@
 import styled, { css } from 'styled-components';
-import { Container as ContainerBg } from '../SectionBackground/styles';
-import { Container as ContainerTx } from '../SectionContainer/styles';
 import { Title as Heading } from '../Heading/styles';
 
 export const Container = styled.div`
-  ${() => css`
+  ${({ theme }) => css`
   display: flex;
   margin: auto;
   padding-top: 5rem;
-;
 
-${Heading}{
-  margin-top: 2rem;
-  color: #E6FFE5;
-}
-
-  ${ContainerBg}{
-
-
+  ${Heading}{
+    margin-top: 2rem;
+    color: ${theme.colors.greenWater};
   }
-
-  ${ContainerTx}{
-
-  }
-
 
   `}
 `;
 
 export const Frame = styled.div`
-  ${() => css`
+  ${({ theme }) => css`
     display: flex;
     width:80%;
     margin: auto;
-    background-color: #52695B;
+    background-color: ${theme.colors.greenLight};
     border: 1px solid rgba(253, 200, 59, 0.5);
-    box-shadow: 0px 0px 7px 5px rgba(0, 0, 0, 0.52);
+    box-shadow: 0rem 0rem 0.7rem 0.5rem rgba(0, 0, 0, 0.52);
     border-radius: 5rem;
     padding: 1rem;
   `}
@@ -43,15 +30,15 @@ export const Frame = styled.div`
 
 export const Image = styled.div`
   ${({ theme }) => css`
-      background: #243520;
+      background: ${theme.colors.greenDark};
       flex: 1;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       text-align: center;
       border: 0.5px solid rgba(253, 200, 59, 0.5);
-      box-shadow: 0px 0px 7px 5px rgba(0, 0, 0, 0.52);
-      border-radius: 4.9rem;
+      box-shadow: 0rem 0rem 0.7rem 0.5rem rgba(0, 0, 0, 0.52);
+      border-radius: 5rem;
 
       img{
         width: 100%;
@@ -63,7 +50,7 @@ export const Image = styled.div`
   `}
 `;
 export const Form = styled.div`
-  ${() => css`
+  ${({ theme }) => css`
     flex: 1;
     text-align: center;
 
@@ -75,15 +62,16 @@ export const Form = styled.div`
 
       label{
         width: 80%;
-        color: #E6FFE5;
+        color: ${theme.colors.greenWater};
         margin-top: 2rem;
         position: relative;
+
           input{
           display: block;
           width: 100%;
           height: 3rem;
-          background: #F1FFEA;
-          border: 1px solid #FDC83B;
+          background: ${theme.colors.greenWater};
+          border: 1px solid ${theme.colors.yellow};
           box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
           border-radius: 5px;
 
@@ -98,7 +86,7 @@ export const Form = styled.div`
     }
 
     > p {
-      color: #E6FFE5;
+      color: ${theme.colors.greenWater};
       margin: 10px 0;
     }
 
@@ -112,7 +100,7 @@ export const Button = styled.button`
     color: ${theme.colors.primaryColor};
     font-size: ${theme.spacings.small};
     background: ${theme.colors.yellow};
-    box-shadow: 0px 5.24966px 5.24966px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 0.24rem 0.24rem rgba(0, 0, 0, 0.25);
     border-radius: 1rem;
     padding: 0.8rem;
     text-align: center;

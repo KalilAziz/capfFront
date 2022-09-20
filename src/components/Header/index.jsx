@@ -32,7 +32,7 @@ export const Header = () => {
       </Styled.Button>
       <Styled.Container onClick={() => setVisible(false)} visible={visible}>
         <SectionContainer>
-          <LogoLink srcImg="./assets/images/capf_logo.svg" link="#" />
+          <LogoLink srcImg="./assets/images/capf_logo.svg" link="/home" />
           <Styled.MenuContainer visible={visible}>
             <ul>
               <li>

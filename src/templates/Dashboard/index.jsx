@@ -1,26 +1,23 @@
-import { useContext, useEffect } from 'react';
-import { LoginContext } from '../../context/LoginProvider/context';
-import { HeaderLogin } from '../../components/HeaderLogin';
+import { useEffect } from 'react';
+import { HeaderDashboard } from '../../components/HeaderDashboard';
 import * as Styled from './styles';
 import { collection, getDocs, getFirestore } from 'firebase/firestore';
 import { firebaseApp } from '../../config/firebaseConfig';
 import { useState } from 'react';
+import { SectionBackground } from '../../components/SectionBackground';
 
 export const Dashboard = () => {
   const db = getFirestore(firebaseApp);
+  // eslint-disable-next-line
   const [dataUser, setDataUser] = useState([]);
 
   //Referência da base de dados
   const useCollactionRef = collection(db, 'Users');
-  // eslint-disable-next-line
-  const { state, dispatch, signInGoogle, signed, user, signOut } =
-    useContext(LoginContext);
 
   useEffect(() => {
     const user = async () => {
       const sessionUser = await sessionStorage.getItem('@AuthFireBase:user');
       const dataUserStorage = await JSON.parse(sessionUser);
-      console.log(dataUserStorage);
       const data = await getDocs(useCollactionRef);
       const dataUsers = await data.docs.map((doc) => ({
         ...doc.data(),
@@ -36,9 +33,10 @@ export const Dashboard = () => {
     user();
   }, []);
   return (
-    <>
-      <HeaderLogin />
-      <Styled.Container> texto:{dataUser.email}</Styled.Container>
-    </>
+    <Styled.Container>
+      <HeaderDashboard>
+        <SectionBackground> ...</SectionBackground>
+      </HeaderDashboard>
+    </Styled.Container>
   );
 };

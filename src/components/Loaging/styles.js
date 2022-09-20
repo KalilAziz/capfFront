@@ -6,7 +6,7 @@ export const Container = styled.div`
 
 export const Loading = styled.div`
   ${({ theme }) => css`
-     background: #002815;
+     background: ${theme.colors.greenDark};
      width: 100vw;
      height: 100vh;
      display: flex;
