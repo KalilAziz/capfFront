@@ -7,4 +7,5 @@ export const data = {
   curso: '',
   periodo: '',
   Matrícula: '',
+  type: 'Aluno',
 };
