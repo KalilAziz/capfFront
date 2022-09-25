@@ -10,10 +10,12 @@ export const Container = styled.div`
 
 export const Header = styled.div`
     background-color: #6B967D;
+
     ${SectionContainer}{
       display: flex;
       max-width: 100%;
       justify-content: space-between;
+      align-items: center;
     }
 `;
 
@@ -151,7 +153,8 @@ export const Navbar = styled.nav`
     }
 
     @media ${theme.media.lteMedium} {
-            display: absolute;
+
+            position: absolute;
             z-index: 5;
             display: ${visible ? 'absolute' : 'none'};
         }

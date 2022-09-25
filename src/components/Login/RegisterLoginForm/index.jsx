@@ -3,14 +3,14 @@ import * as Styled from './styles';
 //Components
 import { Heading } from '../../Heading';
 import { useContext, useState } from 'react';
-import { Create } from '../../../context/LoginProvider/actions';
-import { LoginContext } from '../../../context/LoginProvider/context';
+import { LoginContext } from '../../../context/UserProvider/context';
 import { useNavigate } from 'react-router-dom';
 import { collection, getDocs, getFirestore } from 'firebase/firestore';
 import { firebaseApp } from '../../../config/firebaseConfig';
 
 export const RegisterLoginForm = () => {
   const navigate = useNavigate();
+  // eslint-disable-next-line
   const { dispatch } = useContext(LoginContext);
   const db = getFirestore(firebaseApp);
 
@@ -18,6 +18,7 @@ export const RegisterLoginForm = () => {
   const useCollactionRef = collection(db, 'Users');
 
   const [name, setName] = useState();
+  // eslint-disable-next-line
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [puc, setPuc] = useState(true);
@@ -34,19 +35,7 @@ export const RegisterLoginForm = () => {
     if (counter >= 1) setCounter((s) => s - 1);
   };
 
-  const user = {
-    name: name,
-    email: email,
-    puc: puc,
-    facudadeName: facudadeName,
-    telefone: telefone,
-    matricula: matricula,
-    cursoName: cursoName,
-    periodo: periodo,
-  };
-
-  const userCreate = async (user) => {
-    await Create(dispatch, user, 'Users');
+  const userCreate = async () => {
     const data = await getDocs(useCollactionRef);
     console.log('Peguei dados dos usuários na base de dados');
 
@@ -59,7 +48,7 @@ export const RegisterLoginForm = () => {
     const emailUsers = await dataUser.map((user) => user.email);
     console.log('Separei os emails entre os dados');
 
-    const test = await emailUsers.includes(user.email);
+    const test = await emailUsers.includes(email);
     console.log('usuário existente: ', test);
     if (test) navigate('/dashboard');
   };
@@ -228,7 +217,7 @@ export const RegisterLoginForm = () => {
               <Styled.Button onClick={decrementCounter}>Voltar</Styled.Button>
               <Styled.Button
                 style={{ marginTop: 0 }}
-                onClick={() => userCreate(user)}
+                onClick={() => userCreate()}
               >
                 Criar Conta
               </Styled.Button>

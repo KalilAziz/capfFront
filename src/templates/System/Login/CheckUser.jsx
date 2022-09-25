@@ -17,17 +17,12 @@ export const CheckUser = () => {
   //Referência da base de dados
   const useCollactionRef = collection(db, 'Users');
 
-  // Dados de Todos os emails dos usuários no banco de dados
-  //const [usersEmail, setUserEmail] = useState([]);
-
-  // Dados do usuário salvo no storage
-
-  //Conexão com a base de dados e seta todos os emails no state
   useEffect(() => {
     const getUsers = async () => {
       const sessionUser = await sessionStorage.getItem('@AuthFireBase:user');
       const dataUserStorage = await JSON.parse(sessionUser);
       console.log('Peguei dados do usuário no storage');
+      console.log(dataUserStorage);
 
       const data = await getDocs(useCollactionRef);
       console.log('Peguei dados dos usuários na base de dados');
@@ -38,13 +33,12 @@ export const CheckUser = () => {
       }));
       console.log('separei os dados do usuário vindo da base de dados');
 
-      const emailUsers = await dataUser.map((user) => user.email);
-      console.log('Separei os emails entre os dados');
+      const emailUsers = await dataUser.map((user) => user.Email);
+      console.log('Separei os emails entre os dados', emailUsers);
 
       const test = await emailUsers.includes(dataUserStorage.email);
       console.log('usuário existente: ', test);
-      test ? navigate('/user') : navigate('/login/registerProvider');
-      //test ? navigate('/dashboard') : '';
+      test ? navigate('/dashboard') : navigate('/login/registerProvider');
     };
 
     getUsers();

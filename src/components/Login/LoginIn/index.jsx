@@ -9,7 +9,7 @@ import { ButtonProviderLogin } from '../ButtonProviderLogin';
 import { Heading } from '../../Heading';
 
 //Provider
-import { LoginContext } from '../../../context/LoginProvider/context';
+import { LoginContext } from '../../../context/UserProvider/context';
 
 export const LoginIn = () => {
   // eslint-disable-next-line

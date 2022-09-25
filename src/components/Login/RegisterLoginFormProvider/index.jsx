@@ -1,13 +1,29 @@
 import * as Styled from './styles';
 
-//Components
-import { Heading } from '../../Heading';
-import { useContext, useState } from 'react';
-import { Create } from '../../../context/LoginProvider/actions';
-import { LoginContext } from '../../../context/LoginProvider/context';
-import { useNavigate } from 'react-router-dom';
+//Provider
+import { LoginContext } from '../../../context/UserProvider/context';
+import {
+  setNameUser,
+  setEmailUser,
+  setStudentPucUser,
+  setCellUser,
+  setFacultyUser,
+  setCourseUser,
+  setPeriodUser,
+  setRegistratioUser,
+  setRegistrationUserDb,
+} from '../../../context/UserProvider/actions';
+
+//DB
 import { collection, getDocs, getFirestore } from 'firebase/firestore';
 import { firebaseApp } from '../../../config/firebaseConfig';
+
+//Components
+import { Heading } from '../../Heading';
+
+//Hooks
+import { useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export const RegisterLoginFormProvider = () => {
   const navigate = useNavigate();
@@ -18,17 +34,18 @@ export const RegisterLoginFormProvider = () => {
   const useCollactionRef = collection(db, 'Users');
   const sessionUser = sessionStorage.getItem('@AuthFireBase:user');
   const dataUserStorage = JSON.parse(sessionUser);
-  //console.log(dataUserStorage);
 
   const [name, setName] = useState(dataUserStorage.displayName);
   const [email] = useState(dataUserStorage.email);
-  const [puc, setPuc] = useState(true);
-  const [facudadeName, setFaculdadeName] = useState('Puc - GO');
-  const [telefone, setTelefone] = useState('');
-  const [matricula, setMatricula] = useState('');
-  const [cursoName, setCursoName] = useState('Medicina');
-  const [periodo, setPeriodo] = useState('');
+  const [studentPuc, setStudentPuc] = useState(true);
+  const [cell, setCell] = useState('');
+  const [faculty, setFaculty] = useState('Puc - GO');
+  const [course, setCourse] = useState('Medicina');
+  const [period, setPeriod] = useState('');
+  const [registration, setRegistration] = useState('');
+
   const [counter, setCounter] = useState(1);
+
   const incrementCounter = () => {
     if (counter < 3) setCounter((s) => s + 1);
   };
@@ -36,19 +53,17 @@ export const RegisterLoginFormProvider = () => {
     if (counter >= 1) setCounter((s) => s - 1);
   };
 
-  const user = {
-    name: name,
-    email: email,
-    puc: puc,
-    facudadeName: facudadeName,
-    telefone: telefone,
-    matricula: matricula,
-    cursoName: cursoName,
-    periodo: periodo,
-  };
+  const userCreate = async () => {
+    await setNameUser(dispatch, name);
+    await setEmailUser(dispatch, email);
+    await setStudentPucUser(dispatch, studentPuc);
+    await setCellUser(dispatch, cell);
+    await setFacultyUser(dispatch, faculty);
+    await setCourseUser(dispatch, course);
+    await setPeriodUser(dispatch, period);
+    await setRegistratioUser(dispatch, registration);
+    await setRegistrationUserDb(dispatch);
 
-  const userCreate = async (user) => {
-    await Create(dispatch, user, 'Users');
     const data = await getDocs(useCollactionRef);
     console.log('Peguei dados dos usuários na base de dados');
 
@@ -58,12 +73,13 @@ export const RegisterLoginFormProvider = () => {
     }));
     console.log('separei os dados do usuário vindo da base de dados');
 
-    const emailUsers = await dataUser.map((user) => user.email);
+    const emailUsers = await dataUser.map((user) => user.Email);
     console.log('Separei os emails entre os dados');
-
-    const test = await emailUsers.includes(user.email);
+    console.log(emailUsers);
+    console.log(email);
+    const test = await emailUsers.includes(email);
     console.log('usuário existente: ', test);
-    if (test) navigate('/user/dashboard/eventosdisponiveis');
+    if (test) navigate('/dashboard');
   };
   return (
     <Styled.Container>
@@ -94,7 +110,7 @@ export const RegisterLoginFormProvider = () => {
                 <div className="inputRadio">
                   <input
                     type="radio"
-                    onChange={(e) => setPuc(e.target.value)}
+                    onChange={(e) => setStudentPuc(e.target.value)}
                     value={true}
                     name="brand"
                   />
@@ -103,7 +119,7 @@ export const RegisterLoginFormProvider = () => {
                 <div className="inputRadio">
                   <input
                     type="radio"
-                    onChange={(e) => setPuc(e.target.value)}
+                    onChange={(e) => setStudentPuc(e.target.value)}
                     value={false}
                     name="brand"
                   />
@@ -119,34 +135,34 @@ export const RegisterLoginFormProvider = () => {
                 <span>3. Digite seu telefone</span>
                 <input
                   type="tel"
-                  onChange={(e) => setTelefone(e.target.value)}
-                  value={telefone}
+                  onChange={(e) => setCell(e.target.value)}
+                  value={cell}
                   placeholder="(xx) xxxxx-xxxx"
                 />
               </label>
 
-              {puc === 'true' && (
+              {studentPuc === 'true' && (
                 <label>
                   <span>4. Digite sua matrícola</span>
                   <input
                     type="number"
                     name="puc"
-                    onChange={(e) => setMatricula(e.target.value)}
-                    value={matricula}
+                    onChange={(e) => setRegistration(e.target.value)}
+                    value={registration}
                     placeholder="Numero da matrícola"
                   />
                 </label>
               )}
 
-              {puc === 'false' && (
+              {studentPuc === 'false' && (
                 <>
                   <label>
                     <span>4. Qual o nome da falculdade</span>
                     <input
                       type="text"
                       name="puc"
-                      onChange={(e) => setFaculdadeName(e.target.value)}
-                      value={facudadeName}
+                      onChange={(e) => setFaculty(e.target.value)}
+                      value={faculty}
                       placeholder="Nome da Faculdade"
                     />
                   </label>
@@ -164,27 +180,27 @@ export const RegisterLoginFormProvider = () => {
           )}
           {counter === 3 && (
             <div className="form">
-              {puc === 'true' && (
+              {studentPuc === 'true' && (
                 <label>
                   <span>5. Digite seu período</span>
                   <input
                     type="number"
                     name="puc"
-                    onChange={(e) => setPeriodo(e.target.value)}
-                    value={periodo}
+                    onChange={(e) => setPeriod(e.target.value)}
+                    value={period}
                     placeholder="Numero do período"
                   />
                 </label>
               )}
-              {puc === 'false' && (
+              {studentPuc === 'false' && (
                 <>
                   <label>
                     <span>4. Qual seu curso</span>
                     <input
                       type="text"
                       name="puc"
-                      onChange={(e) => setCursoName(e.target.value)}
-                      value={cursoName}
+                      onChange={(e) => setCourse(e.target.value)}
+                      value={course}
                       placeholder="Numero da matrícola"
                     />
                   </label>
@@ -193,8 +209,8 @@ export const RegisterLoginFormProvider = () => {
                     <input
                       type="number"
                       name="puc"
-                      onChange={(e) => setPeriodo(e.target.value)}
-                      value={periodo}
+                      onChange={(e) => setPeriod(e.target.value)}
+                      value={period}
                       placeholder="Numero do periodo"
                     />
                   </label>
@@ -203,7 +219,7 @@ export const RegisterLoginFormProvider = () => {
               <Styled.Button onClick={decrementCounter}>Voltar</Styled.Button>
               <Styled.Button
                 style={{ marginTop: 0 }}
-                onClick={() => userCreate(user)}
+                onClick={() => userCreate()}
               >
                 Criar Conta
               </Styled.Button>

@@ -10,13 +10,12 @@ import { GlobalStyles } from './styles/global-style';
 import { theme } from './styles/theme';
 
 //Provider
-import { LoginProvider } from './context/LoginProvider';
+import { LoginProvider } from './context/UserProvider';
 
 //Site
 import { App as AppSite } from './templates/Site/App';
 
 //Dashboard
-import { SetData } from './templates/Dashboard/SetData';
 import { App as AppDashboard } from './templates/Dashboard/App';
 import { AvailableEvents } from './templates/Dashboard/AvailableEvents';
 import { DashboardMeusEventos } from './templates/Dashboard/MyEvents';
@@ -50,8 +49,7 @@ root.render(
           />
           <Route path="/login/register" element={<RegisterLogin />} />
 
-          <Route path="/user/" element={<SetData />} />
-          <Route path="/user/dashboard" element={<AppDashboard />}>
+          <Route path="/dashboard" element={<AppDashboard />}>
             <Route path="eventosdisponiveis" element={<AvailableEvents />} />
             <Route path="eventos" element={<DashboardMeusEventos />} />
             <Route path="certificados" element={<DashboardCertificados />} />

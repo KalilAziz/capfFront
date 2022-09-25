@@ -3,7 +3,7 @@ import * as Styled from './styles';
 import { useContext } from 'react';
 
 //Provider
-import { LoginContext } from '../../context/LoginProvider/context';
+import { LoginContext } from '../../context/UserProvider/context';
 
 // eslint-disable-next-line
 export const Button = ({ children, link }) => {
