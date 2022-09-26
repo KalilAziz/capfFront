@@ -31,6 +31,10 @@ export const setRegistratioUser = (dispatch, dataUser) => {
   dispatch({ type: types.SETREGISTRATION, payload: dataUser });
 };
 
+export const setType = (dispatch, dataUser, Id) => {
+  dispatch({ type: types.SETTYPE, payload: dataUser, Id: Id });
+};
+
 export const setRegistrationUserDb = (dispatch) => {
   dispatch({ type: types.REGISTERUSERDB });
 };

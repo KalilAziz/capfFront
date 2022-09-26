@@ -1,11 +1,17 @@
 import * as types from './types';
-import { addDoc, collection, getFirestore } from 'firebase/firestore';
+import {
+  addDoc,
+  collection,
+  doc,
+  getFirestore,
+  setDoc,
+} from 'firebase/firestore';
 import { firebaseApp } from '../../config/firebaseConfig';
 
 export const reducer = (state, action) => {
   const db = getFirestore(firebaseApp);
   const useCollactionRef = collection(db, 'Users');
-  console.log(state);
+
   switch (action.type) {
     case types.SETNAME: {
       console.log(action.payload);
@@ -45,6 +51,24 @@ export const reducer = (state, action) => {
     case types.SETREGISTRATION: {
       console.log(action.payload);
       return { ...state, Registration: action.payload };
+    }
+
+    case types.SETTYPE: {
+      const docRef = doc(useCollactionRef, action.Id);
+      const data = {
+        Type: action.payload,
+      };
+      setDoc(docRef, data, { merge: true })
+        // eslint-disable-next-line
+        .then((docRef) => {
+          console.log('Entire Document has been updated successfully');
+          window.location.reload();
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+
+      return { ...state, Type: action.payload };
     }
 
     case types.REGISTERUSERDB: {

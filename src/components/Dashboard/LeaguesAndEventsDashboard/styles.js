@@ -57,3 +57,21 @@ export const UserList = styled.div`
   margin-top: 2rem;
   `}
 `;
+
+export const Button = styled.button`
+  ${() => css`
+  display: flex;
+  align-items: center;
+  background-color: #005E26;
+  color: #E6FFE5;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+
+  svg{
+    color: #E6FFE5;
+    font-size: 2rem;
+    margin-left: 0.5rem;
+  }
+  `}
+`;

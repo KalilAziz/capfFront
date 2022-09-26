@@ -1,55 +1,67 @@
 import * as Styled from './styles';
 import { HeadingDashboard } from '../HeadingDashboard';
-import { FaUserAlt } from 'react-icons/fa';
+import { FaUsers } from 'react-icons/fa';
+import { AiOutlinePlus } from 'react-icons/ai';
 import { firebaseApp } from '../../../config/firebaseConfig';
 import { collection, getDocs, getFirestore } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
-import { User } from '../User';
+import { LeagueAndEvent } from '../LeagueAndEvent';
+import { useNavigate } from 'react-router-dom';
 
 const db = getFirestore(firebaseApp);
-const useCollactionRef = collection(db, 'Users');
+const useCollactionRef = collection(db, 'LeagueAndEvents');
 
-export const UsersDashboard = () => {
+export const LeaguesAndEventsDashboard = () => {
   // eslint-disable-next-line
-  const [users, setUsers] = useState([]);
+  const [leagueAndEvents, setLeagueAndEvents] = useState([]);
   const [search, setSearch] = useState([]);
   const [name, setName] = useState('');
   const [spenner, setSpenner] = useState(true);
   const [select, setSelect] = useState('');
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     const users = async () => {
       const data = await getDocs(useCollactionRef);
-      const dataUser = await data.docs.map((doc) => ({
+      const dataLeagueAndEvents = await data.docs.map((doc) => ({
         ...doc.data(),
         Id: doc.id,
       }));
-      await setUsers(dataUser);
+      await setLeagueAndEvents(dataLeagueAndEvents);
       console.log('Setei valor');
-      await setSearch(dataUser);
+      await setSearch(dataLeagueAndEvents);
       await setSpenner(false);
     };
     users();
   }, []);
 
+  const handleCreateLeague = () => {
+    navigate('criar');
+  };
+
   useEffect(() => {
     if (name) {
       setSearch(
-        users.filter((user) => {
+        leagueAndEvents.filter((user) => {
           return user.Name.toLowerCase().includes(name.toLowerCase());
         }),
       );
       console.log('Fiz silter', search);
     }
-    if (!name) setSearch(users);
-    if (select) setSearch(users.filter((user) => user.Type === select));
+    if (!name) setSearch(leagueAndEvents);
+    if (select)
+      setSearch(leagueAndEvents.filter((user) => user.Type === select));
   }, [select, name]);
 
   return (
     <Styled.Container>
       <HeadingDashboard>
-        <FaUserAlt /> Usuários
+        <FaUsers /> Ligas e Eventos
       </HeadingDashboard>
+      <Styled.Button onClick={handleCreateLeague}>
+        Adicionar <AiOutlinePlus />
+      </Styled.Button>
       <Styled.Menu>
         <label>
           <span>Nome</span>
@@ -64,13 +76,13 @@ export const UsersDashboard = () => {
           <option value="" selected>
             Todos
           </option>
-          <option value="Aluno">Aluno</option>
-          <option value="Administrador">Administrador</option>
-          <option value="Colaborador">Colaborador</option>
+          <option value="Aluno">Ativo</option>
+          <option value="Administrador">Inativo</option>
         </select>
       </Styled.Menu>
       <Styled.UserList>
-        {!spenner && search.map((user, key) => <User key={key} user={user} />)}
+        {!spenner &&
+          search.map((user, key) => <LeagueAndEvent key={key} user={user} />)}
       </Styled.UserList>
     </Styled.Container>
   );
